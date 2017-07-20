@@ -1,7 +1,7 @@
 {
 "records":[
 {"Category":"Books","Question":"What is your favourite book?"},
-{"Category":"Books","Question":"What genres do you like"},
+{"Category":"Books","Question":"What types of books do you like?"},
 {"Category":"Books","Question":"Who is your favourite author?"},
 {"Category":"Books","Question":"What are some of the advantages of reading books instead of watching TV or movies?"},
 {"Category":"Culture","Question":"What is your favourite food from your country?"},
