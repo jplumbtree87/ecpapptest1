@@ -39,24 +39,26 @@
 
 <div class="container">
 	  <div class="page-header">
-    <h2>Travel</h2>
+    <h2>Would you rather</h2>
   </div>
 
  	 <p><h4 ng-cloak>{{display}}</h4></p>
  	 <div class="col-md-2">
-  	<p><button ng-click="newQuestion()" class="btn btn-primary btn-lg" ng-hide="noQuestion">New Question</button></p>
+  	<p><button ng-click="newQuestion()" class="btn btn-primary btn-lg" ng-hide="noQuestion">{{buttonText}}</button></p>
   	</div>
 
 </div>
 <script>
 var app = angular.module('myApp', []);
 app.controller('questionsCtrl', function($scope, $http) {
-   $scope.questionArray = [];
-  $http.get("questions.json").then(function (response) {
+  $scope.questionArray = [];
+  $scope.display = "To play: Begin each question with 'Would you rather', and then pick between the two options. Discuss why you chose the option you did.";
+  $scope.buttonText = "Let's play!";
+  $http.get("fun.json").then(function (response) {
       $scope.myData = response.data.records;
       angular.forEach($scope.myData, function (value, key) {
-      	if (value.Category== "Travel"){
-      		$scope.questionArray.push(value.Question);
+      	if (value.Category== "Rather"){
+      		$scope.questionArray.push(value.Text);
       		}
       });
   });
@@ -65,11 +67,12 @@ app.controller('questionsCtrl', function($scope, $http) {
 		{
   			$scope.n = Math.floor((Math.random() * $scope.questionArray.length));
   			$scope.display = $scope.questionArray[$scope.n];
+  			$scope.buttonText = "Next question";
   			$scope.questionArray.splice($scope.n, 1);
   		}
   		else
   		{
-  			$scope.display = "There are no more questions in this category.";
+  			$scope.display = "There are no more questions.";
   			$scope.noQuestion = true;
   		}
 	};

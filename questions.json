@@ -24,6 +24,10 @@
 {"Category":"Travel","Question":"What is the best place to go in your country for vacation?"},
 {"Category":"Travel","Question":"Are there any other countries that you want to visit?"},
 {"Category":"Games","Question":"What type of video games do you like to play?"},
-{"Category":"Games","Question":"Did you play video games when you were younger?"}
+{"Category":"Games","Question":"Did you play video games when you were younger?"},
+{"Category":"Know","Question":"What is the best job you have ever had?"},
+{"Category":"Know","Question":"What object would you rescue if your house was on fire?"},
+{"Category":"Know","Question":"What is the most exciting activity you have ever done?"},
+{"Category":"Know","Question":"Who would you most like to meet?"}
 ]
 } 

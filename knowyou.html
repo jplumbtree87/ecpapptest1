@@ -15,23 +15,23 @@
   <div class="container-fluid">
 
     <ul class="nav navbar-nav">
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Discussion Topics<span class="caret"></span></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="books.html">Books & Reading</a></li>
-	          <li><a href="culture.html">Culture</a></li>
-	          <li><a href="knowyou.html">Getting to Know You</a></li>
-	          <li><a href="movies.html">Movies & TV</a></li>
-	          <li><a href="music.html">Music</a></li>
-	          <li><a href="sports.html">Sports</a></li>
-	          <li><a href="travel.html">Travel</a></li>
-	          <li><a href="games.html">Video Games</a></li>
-	        </ul>
-	      </li>
-	      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">For Fun<span class="caret"></span></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="rather.html">Would You Rather?</a></li>
+     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Discussion Topics<span class="caret"></span></a>
+	         <ul class="dropdown-menu">
+	           <li><a href="books.html">Books & Reading</a></li>
+	           <li><a href="culture.html">Culture</a></li>
+	           <li><a href="knowyou.html">Getting to Know You</a></li>
+	           <li><a href="movies.html">Movies & TV</a></li>
+	           <li><a href="music.html">Music</a></li>
+	           <li><a href="sports.html">Sports</a></li>
+	           <li><a href="travel.html">Travel</a></li>
+	           <li><a href="games.html">Video Games</a></li>
+	         </ul>
+	       </li>
+	       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">For Fun<span class="caret"></span></a>
+	 	          <ul class="dropdown-menu">
+	 	            <li><a href="rather.html">Would You Rather?</a></li>
 	            	<li><a href="twister.html">Tongue-Twisters</a></li>
-		          </ul>
+	 	          </ul>
       </li>
      </ul>
   </div>
@@ -39,7 +39,7 @@
 
 <div class="container">
 	  <div class="page-header">
-    <h2>Sports</h2>
+    <h2>Getting to Know You</h2>
   </div>
 
  	 <p><h4 ng-cloak>{{display}}</h4></p>
@@ -55,7 +55,7 @@ app.controller('questionsCtrl', function($scope, $http) {
   $http.get("questions.json").then(function (response) {
       $scope.myData = response.data.records;
       angular.forEach($scope.myData, function (value, key) {
-      	if (value.Category== "Sports"){
+      	if (value.Category== "Know"){
       		$scope.questionArray.push(value.Question);
       		}
       });
