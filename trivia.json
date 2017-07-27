@@ -1,0 +1,8 @@
+{
+"records":[
+{"Question":"In what year did Canada's confederation occur?", "Answer":"1867", "A":"1867", "B":"1933", "C":"1852", "D":"1812"},
+{"Question":"In what year was the Canadian flag introduced?", "Answer":"1965", "A":"1922", "B":"1945", "C":"1951", "D":"1965"},
+{"Question":"Which province joined Canada most recently?", "Answer":"Newfoundland", "A":"Nova Scotia", "B":"Newfoundland", "C":"PEI", "D":"Manitoba"},
+{"Question":"What's the official motto of Canada?", "Answer":"From sea to sea", "A":"From sea to sea", "B":"O Canada", "C":"Our home and native land", "D":"Glorious and free"}
+]
+} 

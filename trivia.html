@@ -40,11 +40,23 @@
 
 <div class="container">
 	  <div class="page-header">
-    <h2>Would you rather</h2>
+    <h2>Canadian Trivia</h2>
   </div>
 
  	 <p><h4 ng-cloak>{{display}}</h4></p>
- 	 <div class="col-md-2">
+ 	 <div class="col-md-5">
+ 	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question1" name="optradio">{{question1}}</label>
+	 </div>
+	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question2" name="optradio">{{question2}}</label>
+	 </div>
+	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question3" name="optradio">{{question3}}</label>
+	</div>
+	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question4" name="optradio">{{question4}}</label>
+	</div>
   	<p><button ng-click="newQuestion()" class="btn btn-primary btn-lg" ng-hide="noQuestion">{{buttonText}}</button></p>
   	</div>
 
@@ -53,28 +65,62 @@
 var app = angular.module('myApp', []);
 app.controller('questionsCtrl', function($scope, $http) {
   $scope.questionArray = [];
-  $scope.display = "To play: Begin each question with 'Would you rather', and then pick between the two options. Discuss why you chose the option you did.";
+  $scope.display = "To play: Choose the correct answer out of the 4 listed";
   $scope.buttonText = "Let's play!";
-  $http.get("fun.json").then(function (response) {
+  $scope.radioQuestion = true;
+  $scope.questionFlag = true;
+  $http.get("trivia.json").then(function (response) {
       $scope.myData = response.data.records;
       angular.forEach($scope.myData, function (value, key) {
-      	if (value.Category== "Rather"){
-      		$scope.questionArray.push(value.Text);
-      		}
+
+      		$scope.questionArray.push(value);
+
       });
   });
   $scope.newQuestion = function () {
-		if ($scope.questionArray.length >= 1)
-		{
-  			$scope.n = Math.floor((Math.random() * $scope.questionArray.length));
-  			$scope.display = $scope.questionArray[$scope.n];
-  			$scope.buttonText = "Next question";
-  			$scope.questionArray.splice($scope.n, 1);
+
+		if ($scope.questionArray.length >= 1 && $scope.questionFlag == false)
+		  		{
+		  			$scope.radioQuestion = true;
+
+		  			if ($scope.questionArray[$scope.n].Answer == $scope.radioSelect)
+		  				{
+		  					$scope.display = "Correct";
+		  				}
+		  			else
+		  			{
+		  			$scope.display = "Incorrect, the correct answer is: " + $scope.questionArray[$scope.n].Answer;
+		  			}
+		  			$scope.questionArray.splice($scope.n, 1);
+		  			$scope.buttonText = "Next Question";
+
+  		}
+  		else if ($scope.questionArray.length >= 1 && $scope.questionFlag == true)
+				{
+					$scope.radioQuestion = false;
+		  			$scope.n = Math.floor((Math.random() * $scope.questionArray.length));
+		  			$scope.display = $scope.questionArray[$scope.n].Question;
+		  			$scope.question1 = $scope.questionArray[$scope.n].A;
+		  			$scope.question2 = $scope.questionArray[$scope.n].B;
+		  			$scope.question3 = $scope.questionArray[$scope.n].C;
+		  			$scope.question4 = $scope.questionArray[$scope.n].D;
+		  			$scope.buttonText = "Check Answer";
+
   		}
   		else
   		{
   			$scope.display = "There are no more questions.";
   			$scope.noQuestion = true;
+  			$scope.radioQuestion = true;
+  		}
+
+  		if ($scope.questionFlag == true)
+  		{
+  		$scope.questionFlag = false;
+  		}
+  		else
+  		{
+  		$scope.questionFlag = true;
   		}
 	};
 });
