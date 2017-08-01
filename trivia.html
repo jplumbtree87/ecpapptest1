@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="styles/bootstrap.min.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-<script src="js/angular.js"></script>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-sanitize.js"></script>
 </head>
 <body>
 <div ng-app="myApp" ng-controller="questionsCtrl">
@@ -40,35 +41,37 @@
 
 <div class="container">
 	  <div class="page-header">
-    <h2>Canadian Trivia</h2>
+    <h2>Canadian Citizenship Quiz</h2>
   </div>
 
- 	 <p><h4 ng-cloak>{{display}}</h4></p>
+ 	 <p><h4 ng-cloak ng-bind-html="display"></h4></p>
  	 <div class="col-md-5">
  	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
-	   <label><input type="radio" ng-model="radioSelect" ng-value="question1" name="optradio">{{question1}}</label>
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question1" name="optradio" ngcloak>{{question1}}</label>
 	 </div>
 	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
-	   <label><input type="radio" ng-model="radioSelect" ng-value="question2" name="optradio">{{question2}}</label>
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question2" name="optradio"ngcloak>{{question2}}</label>
 	 </div>
 	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
-	   <label><input type="radio" ng-model="radioSelect" ng-value="question3" name="optradio">{{question3}}</label>
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question3" name="optradio"ngcloak>{{question3}}</label>
 	</div>
 	 <div class="radio" ng-model="radioSelect" ng-hide="radioQuestion">
-	   <label><input type="radio" ng-model="radioSelect" ng-value="question4" name="optradio">{{question4}}</label>
+	   <label><input type="radio" ng-model="radioSelect" ng-value="question4" name="optradio"ngcloak>{{question4}}</label>
 	</div>
   	<p><button ng-click="newQuestion()" class="btn btn-primary btn-lg" ng-hide="noQuestion">{{buttonText}}</button></p>
   	</div>
 
 </div>
 <script>
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngSanitize']);
 app.controller('questionsCtrl', function($scope, $http) {
   $scope.questionArray = [];
-  $scope.display = "To play: Choose the correct answer out of the 4 listed";
+  $scope.display = "This is a practice citzenship test. The questions are drawn from the Discover Canada book used for the real test. <br><br> In order to pass you must answer at least 15 of the 20 questions correctly.<br><br> Good luck!";
   $scope.buttonText = "Let's play!";
   $scope.radioQuestion = true;
   $scope.questionFlag = true;
+  $scope.questionLength = 1;
+  $scope.correctScore = 0;
   $http.get("trivia.json").then(function (response) {
       $scope.myData = response.data.records;
       angular.forEach($scope.myData, function (value, key) {
@@ -79,23 +82,26 @@ app.controller('questionsCtrl', function($scope, $http) {
   });
   $scope.newQuestion = function () {
 
-		if ($scope.questionArray.length >= 1 && $scope.questionFlag == false)
+		if ($scope.questionArray.length >= 1 && $scope.questionFlag == false && $scope.questionLength <=20)
 		  		{
 		  			$scope.radioQuestion = true;
 
 		  			if ($scope.questionArray[$scope.n].Answer == $scope.radioSelect)
 		  				{
 		  					$scope.display = "Correct";
+		  					$scope.correctScore++;
 		  				}
 		  			else
 		  			{
-		  			$scope.display = "Incorrect, the correct answer is: " + $scope.questionArray[$scope.n].Answer;
+		  			$scope.display = "Incorrect. <br><br> The correct answer is: " + $scope.questionArray[$scope.n].Answer;
 		  			}
 		  			$scope.questionArray.splice($scope.n, 1);
+		  			$scope.questionLength++;
 		  			$scope.buttonText = "Next Question";
 
+
   		}
-  		else if ($scope.questionArray.length >= 1 && $scope.questionFlag == true)
+  		else if ($scope.questionArray.length >= 1 && $scope.questionFlag == true && $scope.questionLength <=20)
 				{
 					$scope.radioQuestion = false;
 		  			$scope.n = Math.floor((Math.random() * $scope.questionArray.length));
@@ -109,7 +115,7 @@ app.controller('questionsCtrl', function($scope, $http) {
   		}
   		else
   		{
-  			$scope.display = "There are no more questions.";
+  			$scope.display = "The test is complete! <br><br> Your score is: " + $scope.correctScore + "/20. <br><br> You need 15/20 or better to pass.";
   			$scope.noQuestion = true;
   			$scope.radioQuestion = true;
   		}
@@ -122,6 +128,7 @@ app.controller('questionsCtrl', function($scope, $http) {
   		{
   		$scope.questionFlag = true;
   		}
+
 	};
 });
 </script>
