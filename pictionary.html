@@ -32,9 +32,9 @@
 	       </li>
 	       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Fun and Games<span class="caret"></span></a>
 	 	          <ul class="dropdown-menu">
-	  	 	            <li><a href="pictionary.html">Picture Taboo</a></li>
-						<li><a href="rather.html">Would You Rather?</a></li>
-	            		<li><a href="twister.html">Tongue-Twisters</a></li>
+	 	          	<li><a href="pictionary.html">Picture Taboo</a></li>
+	 	            <li><a href="rather.html">Would You Rather?</a></li>
+	            	<li><a href="twister.html">Tongue-Twisters</a></li>
 	              </ul>
       </li>
       <li class="dropdown"><a href="trivia.html">Canadian Citizenship Practice Test</a></li>
@@ -44,14 +44,28 @@
 
 <div class="container">
 	  <div class="page-header">
-    <h2>Tongue Twisters</h2>
+    <h2>Picture Taboo</h2>
   </div>
 
- 	 <p><h4 ng-cloak>{{display}}</h4></p>
+<p><h4 ng-cloak>{{display}}</h4></p>
+ 	 <div class="col-md-5">
+	  	 <div class="radio-inline" ng-model="radioSelect" ng-cloak ng-hide="radioQuestion">
+	 	   <label><input type="radio" ng-model="radioSelect" value="Easy" name="optradio" ng-cloak>Easy</label>
+	 	 </div>
+	 	 <div class="radio-inline" ng-model="radioSelect" ng-cloak ng-hide="radioQuestion">
+	 	   <label><input type="radio" ng-model="radioSelect" value="Medium" name="optradio"ng-cloak>Medium</label>
+	 	 </div>
+	 	 <div class="radio-inline" ng-model="radioSelect" ng-cloak ng-hide="radioQuestion">
+	 	   <label><input type="radio" ng-model="radioSelect" value="Difficult" name="optradio"ng-cloak>Difficult</label>
+	</div>
+
+
  	 <br>
-
- 	 <div class="col-md-2 text-center">
-
+	 <div>
+	     <img ng-src="{{imgSrc}}" ng-hide="noQuestion">
+	</div>
+	<br>
+	<div class="col-md-2 text-center">
   	<p><button ng-click="newQuestion()" ng-cloak class="btn btn-primary btn-lg" ng-hide="noQuestion">{{buttonText}}</button></p>
   	</div>
 
@@ -59,28 +73,40 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('questionsCtrl', function($scope, $http) {
-  $scope.questionArray = [];
-  $scope.display = "Try saying these phrases as quickly as you can!";
+  $scope.imageArray = [];
+  $scope.display = "Rules:";
   $scope.buttonText = "Let's play!";
-  $http.get("fun.json").then(function (response) {
+  $http.get("images.json").then(function (response) {
       $scope.myData = response.data.records;
       angular.forEach($scope.myData, function (value, key) {
-      	if (value.Category== "Twister"){
-      		$scope.questionArray.push(value.Text);
-      		}
-      });
+			$scope.imageArray.push(value);
+	  });
   });
   $scope.newQuestion = function () {
-		if ($scope.questionArray.length >= 1)
+		$scope.radioQuestion = true;
+		if ($scope.imageArray.length >= 1)
 		{
-  			$scope.n = Math.floor((Math.random() * $scope.questionArray.length));
-  			$scope.display = $scope.questionArray[$scope.n];
-  			$scope.buttonText = "Next twister";
-  			$scope.questionArray.splice($scope.n, 1);
+  			$scope.n = Math.floor((Math.random() * $scope.imageArray.length));
+  			$scope.imgSrc = $scope.imageArray[$scope.n].Source;
+  			if ($scope.radioSelect == "Easy")
+			{
+				$scope.display = "Banned words: " + $scope.imageArray[$scope.n].Easy;
+			}
+			if ($scope.radioSelect == "Medium")
+			{
+				$scope.display = "Banned words: " + $scope.imageArray[$scope.n].Easy + ", " + $scope.imageArray[$scope.n].Med;
+			}
+			if ($scope.radioSelect == "Difficult")
+			{
+				$scope.display = "Banned words: " + $scope.imageArray[$scope.n].Easy + ", " + $scope.imageArray[$scope.n].Med + ", " + $scope.imageArray[$scope.n].Hard;
+			}
+			$scope.buttonText = "Next picture";
+  			$scope.imageArray.splice($scope.n, 1);
   		}
   		else
   		{
-  			$scope.display = "There are no more twisters.";
+  			$scope.imgSrc = "";
+  			$scope.display = "There are no more images.";
   			$scope.noQuestion = true;
   		}
 	};
