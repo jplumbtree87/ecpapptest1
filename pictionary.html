@@ -8,6 +8,7 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 <script src="js/angular.js"></script>
+<script src="js/angular-sanitize.js"></script>
 </head>
 <body>
 <div ng-app="myApp" ng-controller="questionsCtrl">
@@ -47,7 +48,7 @@
     <h2>Picture Taboo</h2>
   </div>
 
-<p><h4 ng-cloak>{{display}}</h4></p>
+<p><h4 ng-cloak ng-bind-html="display"></h4></p>
  	 <div class="col-md-5">
 	  	 <div class="radio-inline" ng-model="radioSelect" ng-cloak ng-hide="radioQuestion">
 	 	   <label><input type="radio" ng-model="radioSelect" value="Easy" name="optradio" ng-cloak>Easy</label>
@@ -71,10 +72,10 @@
 
 </div>
 <script>
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngSanitize']);
 app.controller('questionsCtrl', function($scope, $http) {
   $scope.imageArray = [];
-  $scope.display = "Rules:";
+  $scope.display = "Rules: Describe the picture without using the banned words at the top. <br><br> A higher difficulty setting means more words are banned. <br><br> Your partner must guess what the picture is. Have fun!";
   $scope.buttonText = "Let's play!";
   $http.get("images.json").then(function (response) {
       $scope.myData = response.data.records;
