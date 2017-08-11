@@ -4,6 +4,21 @@
 {"Source":"images/car.jpg", "Easy":"Blue, Car, Automobile", "Med":"Drive", "Hard":"Road"},
 {"Source":"images/eating.jpg", "Easy":"Dinner, Food, Eating", "Med":"Lunch", "Hard":"Meal"},
 {"Source":"images/winter.jpg", "Easy":"Trees, Winter, Snow", "Med":"Forest", "Hard":"Cold"},
+{"Source":"images/glasses.jpg", "Easy":"Glasses, Seeing, Eyes", "Med":"Face", "Hard":"Wear"},
+{"Source":"images/speech.jpg", "Easy":"Speech, Talking, Presentation", "Med":"Audience", "Hard":"Give"},
+{"Source":"images/chairs.jpg", "Easy":"Sitting, Chair, Furniture", "Med":"Resting", "Hard":"Watching"},
+{"Source":"images/necklace.jpg", "Easy":"Necklace, Jewelry, Expensive", "Med":"Beautiful", "Hard":"Wear"},
+{"Source":"images/computer.jpg", "Easy":"Computer, Typing, Internet", "Med":"Games", "Hard":"Office"},
+{"Source":"images/plane.jpg", "Easy":"Plane, Air, Fly", "Med":"Sky", "Hard":"Travel"},
+{"Source":"images/apple.jpg", "Easy":"Apple, Fruit, Grow", "Med":"Red", "Hard":"Eat"},
+{"Source":"images/chicken.jpg", "Easy":"Chicken, Rooster, Hen", "Med":"Bird", "Hard":"Eat"},
+{"Source":"images/books.jpg", "Easy":"Books, Reading, School", "Med":"Library", "Hard":"Learn"},
+{"Source":"images/guitar.jpg", "Easy":"Guitar, Music, Instrument", "Med":"Strings", "Hard":"Play"},
+{"Source":"images/CD.jpg", "Easy":"CD, Music, Disk", "Med":"Computer", "Hard":"Play"},
+{"Source":"images/running.jpg", "Easy":"Running, Exercise, Jogging", "Med":"Race", "Hard":"Health"},
+{"Source":"images/fire.jpg", "Easy":"Fire, Hot, Burn", "Med":"Camping", "Hard":"Cooking"},
+{"Source":"images/cat.jpg", "Easy":"Cat, Pet, Fur", "Med":"Mouse", "Hard":"Animal"},
+{"Source":"images/leaf.jpg", "Easy":"Leaf, Plant, Fall", "Med":"Green", "Hard":"Tree"},
 {"Source":"images/sleep.jpg", "Easy":"Bed, Sleep, Pillow", "Med":"Blanket", "Hard":"Night"}
 ]
 } 
