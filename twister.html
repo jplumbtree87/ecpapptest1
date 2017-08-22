@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles/bootstrap.min.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-<script src="js/angular.js"></script>
+  <script src="js/angular.js"></script>
 </head>
 <body>
 <div ng-app="myApp" ng-controller="questionsCtrl">
@@ -43,18 +43,14 @@
 </nav>
 
 <div class="container">
-	  <div class="page-header">
+  <div class="page-header">
     <h2>Tongue Twisters</h2>
   </div>
-
- 	 <p><h4 ng-cloak>{{display}}</h4></p>
- 	 <br>
-
- 	 <div class="col-md-2 text-center">
-
-  	<p><button ng-click="newQuestion()" ng-cloak class="btn btn-primary btn-lg" ng-hide="noQuestion">{{buttonText}}</button></p>
-  	</div>
-
+  <p><h4 ng-cloak>{{display}}</h4></p>
+  <br>
+  <div class="col-md-2 text-center">
+	<p><button ng-click="newQuestion()" ng-cloak class="btn btn-primary btn-lg" ng-hide="noQuestion">{{buttonText}}</button></p>
+  </div>
 </div>
 <script>
 var app = angular.module('myApp', []);
